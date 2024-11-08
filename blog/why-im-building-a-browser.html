@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2024-11-08" />
+  <title>why i’m building a browser</title>
+  <link rel="stylesheet" href="/static/reset.css" />
+  <link rel="stylesheet" href="/static/index.css" />
+</head>
+<body>
+<table class="header" style="border: none;">
+    <tr>
+      <td colspan="4" class="banner" style="border:none; height: 100px; background-size: cover; background-position: center; background-image: url('/static/banner/banner_1500x500.jpeg');">
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="3" class="width-min" style="width: 120px; padding-top: -60px; vertical-align: top; border: none;">
+        <div style="width: 120px; height: 120px; border-radius: 60px; border: 6px solid black; overflow: hidden; margin-top: -60px;">
+          <img src="/static/banner/kyon_pfp_400x400.jpg" style="width: 100%; height: 100%; object-fit: cover;" alt="">
+        </div>
+      </td>
+      <td colspan="2" class="width-auto" style="text-align: left; border:none;">
+        <h1 class="title">KYON - BLOG</h1>
+        <span class="subtitle" style="font-size: 90%;">why i’m building
+a browser</span>
+      </td>
+    </tr>
+</table>
+
+<!-- Blog Post Date -->
+  <p class="date" style="font-size: 85%; color: gray;">Published on 2024-11-08</p>
+
+<h2 id="okay.-why">okay. why?</h2>
+<p>im making a browser because i want to spend less time navigating and
+more time absorbing data.</p>
+<p>i browse the internet. all the time. i am chronically online.</p>
+<p>the most amount of time is spent on researching (no, not that kind of
+research)</p>
+<h3 id="section"><a
+href="https://x.com/0xKyon/status/1845599571587854731">2024-10-13</a></h3>
+<ul class="incremental">
+<li>github (code search)</li>
+<li>arxiv + gscholar (keyword search)</li>
+<li>google (date + keyword + file)</li>
+<li>reddit (algolia)</li>
+<li>x dot com (broken search)</li>
+<li>chatgpt (domain exploration)</li>
+</ul>
+<figure>
+<img src="https://pbs.twimg.com/media/GZzjBudaQAAJXk-.jpg"
+alt="how i research:" />
+<figcaption aria-hidden="true">how i research:</figcaption>
+</figure>
+<p>my browser ends up looking like this:</p>
+<p>tabs so small you can only see their favicons. this is a terrible
+experience. and it’s not just about ui, this <em>slows me down</em> and
+software should never do that.</p>
+<h2 id="skill-issue">skill issue</h2>
+<p>yes, i browse the internet differently. maybe i am an edge case? i
+have asked myself this: if there’s enough of me then why aren’t there
+good enough solutions yet?</p>
+<p>well, there are. it’s just they aren’t really great. they aren’t even
+good tbh.</p>
+<p>i have concluded that this is probably because <em>building browsers
+is extremely hard</em> you’re basically building virtualization software
+to run an operating system for the internet</p>
+<p>the modern web is a mess, it’s plethora of badly defined specs and
+esoteric rulesets which almost nobody follow 100% of the time</p>
+<p>and if they do, just wait until w3 decides to rule out your usage of
+h1 tags and condemn your blasphemy</p>
+<p>it’s tough, open source efforts to make browser engines have been
+mostly failures with almost nobody having the levels of autism in their
+teams peaking enough to cross feature parity lines with the likes of
+chromium and webkit</p>
+<p>so no, don’t make a browser engine (unless you’re hearing voices)</p>
+<h2 id="how">how</h2>
+<p>so how do we build a browser if we can’t build a browser? don’t
+reinvent the wheel, use an existing engine</p>
+<p>modern browser engines are considerably fast. you want to do it in
+rust? good luck with the next 10yrs of your life.</p>
+<p>i didn’t take the saner route, i first tried c (sokol + ultralight)
+and then rust (iced + servo) and then rust again (iced + ultralight +
+turin &amp; turin + native webview combo)</p>
+<p>for many reasons which i do not care to explain here, i find the
+stack extremely lacking both in terms of dev ex and more importantly
+purpose driven smaller engines cannot deliver the full breadth of
+features the web has to offer</p>
+<p>the worst thing i could do is work on a browser that couldn’t support
+the pages i wanted to view for some obscure reason.</p>
+<p>so i went with the stack god intended for browser dev, i chose
+<em>electron</em>. it’s simple, it’s already chromium all i need to add
+is the ux.</p>
+<p>many opponents of electron lament over security for them i say: skill
+issue.</p>
+<p>note: using native <webview> can be secure you just need to do basic
+opsec note 2: i’m making this for myself, don’t use it if you’re
+scared.</p>
+<h2 id="progress">progress</h2>
+<p>i’m still actively working on it, for live updates you can check out
+my posts on <a href="https://x.com/0xkyon">x</a> or the much slower
+updates <a href="/projects/browser.html">here</a></p>
+
+  <div class="debug-grid"></div>
+  <script src="static/js/index.js"></script>
+</body>
+</html>

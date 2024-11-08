@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>x stream Chat</title>
+  <link rel="stylesheet" href="/static/reset.css" />
+  <link rel="stylesheet" href="/static/index.css" />
+</head>
+<body>
+<table class="header" style="border: none;">
+    <tr>
+      <td colspan="4" class="banner" style="border:none; height: 100px; background-size: cover; background-position: center; background-image: url('/static/banner/banner_1500x500.jpeg');">
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="3" class="width-min" style="width: 120px; padding-top: -60px; vertical-align: top; border: none;">
+        <div style="width: 120px; height: 120px; border-radius: 60px; border: 6px solid black; overflow: hidden; margin-top: -60px;">
+          <img src="/static/banner/kyon_pfp_400x400.jpg" style="width: 100%; height: 100%; object-fit: cover;" alt="">
+        </div>
+      </td>
+      <td colspan="2" class="width-auto" style="text-align: left; border:none;">
+        <h1 class="title">KYON - DEV</h1>
+        <span class="subtitle" style="font-size: 90%;">x stream
+Chat</span>
+      </td>
+    </tr>
+</table>
+<!-- <label class="debug-toggle-label"><input type="checkbox" class="debug-toggle" /> Debug mode</label> -->
+
+<!-- Project Date -->
+
+<h2 id="browser-ext-for-x-to-extract-live-stream-details">browser ext
+for x to extract live stream details</h2>
+<p>live streaming on x was becoming popular, but the experience didn’t
+feel complete</p>
+<p>this annoyed me so much that i got distracted from my <a
+href="/projects/waifu/oai-waifu.html">oai-waifu</a> project.</p>
+<p>see the thing was x streams didn’t have live chat embeddings like
+twitch does, you had to show their popup chat dialog window inside your
+stream.</p>
+<p>it’s a browser window on a stream, it’s <em>ugly</em></p>
+<p>you need chat, viewcount, reactions, obs integration, etc etc</p>
+<p>so obviously we have to <em>fix</em> that.</p>
+<h3 id="section"><a
+href="https://x.com/0xKyon/status/1841910358807871689">2024-10-03</a></h3>
+<figure>
+<img src="https://pbs.twimg.com/media/GY_HmT-bAAEa80P.jpg"
+alt="nerd sniped into yet another project" />
+<figcaption aria-hidden="true">nerd sniped into yet another
+project</figcaption>
+</figure>
+<h3 id="section-1"><a
+href="https://x.com/0xKyon/status/1841926534153871419">2024-10-03</a></h3>
+<figure>
+<img src="https://pbs.twimg.com/media/GY_WauFbwAAfDW-.png"
+alt="slowly progressing" />
+<figcaption aria-hidden="true">slowly progressing</figcaption>
+</figure>
+<p>thoughts:</p>
+<ul class="incremental">
+<li>show user greenlight if it’s on and connected</li>
+<li>show/hide pfp or username or handle</li>
+<li>font (size, name, styling)</li>
+</ul>
+<h3 id="section-2"><a
+href="https://x.com/0xKyon/status/1841948908047712434">2024-10-03</a></h3>
+<figure>
+<img src="https://pbs.twimg.com/media/GY_qs9uagAAtX8N.jpg"
+alt="okay we’ve got live stream message fetching almost" />
+<figcaption aria-hidden="true">okay we’ve got live stream message
+fetching almost</figcaption>
+</figure>
+<p>pfp and verified status not fetched, i want everything on screen to
+get fetched so user can choose what they want to display (via ext
+options)</p>
+<h3 id="section-3"><a
+href="https://x.com/0xKyon/status/1842239566834778314">2024-10-04</a></h3>
+<figure>
+<img src="https://pbs.twimg.com/media/GZDzBNTawAAiyWu.jpg"
+alt="debugging browser extensions are a bitch, added a status page for sanity:" />
+<figcaption aria-hidden="true">debugging browser extensions are a bitch,
+added a status page for sanity:</figcaption>
+</figure>
+<h3 id="section-4"><a
+href="https://x.com/0xKyon/status/1842336753551863875">2024-10-04</a></h3>
+<p>took me a day, but we’re finally done! v1 source code in next
+tweet.</p>
+<p>feel free to add more features and contribute, glhf</p>
+<figure>
+<video
+src="https://video.twimg.com/ext_tw_video/1842336238126387200/pu/vid/avc1/1728x1080/exygrMTVDu68_rXJ.mp4?tag=14"
+controls=""><a
+href="https://video.twimg.com/ext_tw_video/1842336238126387200/pu/vid/avc1/1728x1080/exygrMTVDu68_rXJ.mp4?tag=14">chat
+overlays for live streams on x the everything app</a></video>
+<figcaption aria-hidden="true">chat overlays for live streams on x the
+everything app</figcaption>
+</figure>
+<h3 id="section-5"><a
+href="https://x.com/0xKyon/status/1842336755867058666">2024-10-04</a></h3>
+<p>src: https://github.com/kyon-eth/x-stream-chat</p>
+<p>pending features:</p>
+<ul class="incremental">
+<li>font styles via extension popup</li>
+<li>publish on browser extension stores</li>
+</ul>
+<h3 id="section-6"><a
+href="https://x.com/0xKyon/status/1843080106589528105">2024-10-07</a></h3>
+<figure>
+<video
+src="https://video.twimg.com/ext_tw_video/1843078734389399552/pu/vid/avc1/1920x1080/NZ9mNn3BlkCqUYT6.mp4?tag=14"
+controls=""><a
+href="https://video.twimg.com/ext_tw_video/1843078734389399552/pu/vid/avc1/1920x1080/NZ9mNn3BlkCqUYT6.mp4?tag=14">counterpoint:</a></video>
+<figcaption aria-hidden="true">counterpoint:</figcaption>
+</figure>
+<p>you really have to understand the context for this to happen (check
+linked post)</p>
+<p>i was running low on motivation (it’s a browser ext, they’re boring)
+so i picked up imaginary twitter beef to give me enough dopamine to
+cross the finish line.</p>
+<ul class="incremental">
+<li>learned how to use capcut</li>
+<li>made 10 distinct themes for the chat</li>
+<li>rendered 40s of video in browser</li>
+<li>overlay chat dialogues in css + html</li>
+<li>time synced via vanilla js</li>
+</ul>
+<p>all for what? turns out my opponent was vegetarian</p>
+<h3 id="section-7"><a
+href="https://x.com/0xKyon/status/1843080109236117610">2024-10-07</a></h3>
+<p>added 10+ styles</p>
+<p>moving on to other projects, feel free to contribute.</p>
+<p>repo here: https://github.com/kyon-eth/x-stream-chat</p>
+<h3 id="section-8"><a
+href="https://x.com/0xKyon/status/1846888331315237312">2024-10-17</a></h3>
+<p>i rawdogged html, css + vanilla js to make this stream btw</p>
+<ul class="incremental">
+<li>chat + view count is via my x-stream extension</li>
+<li>wrote a performant video to ascii converter to run in real time</li>
+<li>browser window -&gt; obs</li>
+</ul>
+<p>never kill yourself</p>
+<figure>
+<img src="https://pbs.twimg.com/media/GaF3JQQb0AMyEmo.jpg"
+alt="afk streaming for 8hrs++ now" />
+<figcaption aria-hidden="true">afk streaming for 8hrs++ now</figcaption>
+</figure>
+
+  <div class="debug-grid"></div>
+  <script src="static/js/index.js"></script>
+</body>
+</html>

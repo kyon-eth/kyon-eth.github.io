@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>genshin shader</title>
+  <link rel="stylesheet" href="/static/reset.css" />
+  <link rel="stylesheet" href="/static/index.css" />
+</head>
+<body>
+<table class="header" style="border: none;">
+    <tr>
+      <td colspan="4" class="banner" style="border:none; height: 100px; background-size: cover; background-position: center; background-image: url('/static/banner/banner_1500x500.jpeg');">
+      </td>
+    </tr>
+    <tr>
+      <td rowspan="3" class="width-min" style="width: 120px; padding-top: -60px; vertical-align: top; border: none;">
+        <div style="width: 120px; height: 120px; border-radius: 60px; border: 6px solid black; overflow: hidden; margin-top: -60px;">
+          <img src="/static/banner/kyon_pfp_400x400.jpg" style="width: 100%; height: 100%; object-fit: cover;" alt="">
+        </div>
+      </td>
+      <td colspan="2" class="width-auto" style="text-align: left; border:none;">
+        <h1 class="title">KYON - DEV</h1>
+        <span class="subtitle" style="font-size: 90%;">genshin
+shader</span>
+      </td>
+    </tr>
+</table>
+<!-- <label class="debug-toggle-label"><input type="checkbox" class="debug-toggle" /> Debug mode</label> -->
+
+<!-- Project Date -->
+
+<h2 id="custom-shader-for-vrms">custom shader for vrms</h2>
+<p>this was my attempt at making a genshin impact style shader in
+threejs using glsl shaders and post processing in browser</p>
+<p>around this time i was doing a lot of <a
+href="https://github.com/vrm-c/vrm-specification">VRM</a> work and
+needed my waifus to look good</p>
+<h3 id="section"><a
+href="https://x.com/0xKyon/status/1845174705227239861">2024-10-12</a></h3>
+<p>starting with this:</p>
+<figure>
+<img src="https://pbs.twimg.com/media/GZtgj78aAAEUBED.jpg"
+alt="all my test renderings look terrible, time to write new shaders and create an actual scene" />
+<figcaption aria-hidden="true">all my test renderings look terrible,
+time to write new shaders and create an actual scene</figcaption>
+</figure>
+<h3 id="section-1"><a
+href="https://x.com/0xKyon/status/1845178839712006623">2024-10-12</a></h3>
+<figure>
+<img src="https://pbs.twimg.com/media/GZtkRboaAAAkZ1T.jpg"
+alt="made some progress" />
+<figcaption aria-hidden="true">made some progress</figcaption>
+</figure>
+<p>going for a ghibli style obv</p>
+<h3 id="section-2"><a
+href="https://x.com/0xKyon/status/1845570994075046100">2024-10-13</a></h3>
+<p>writing a custom anime shader has made me realize i should probably
+not open src everything i showcase on x dot com</p>
+<h3 id="section-3"><a
+href="https://x.com/0xKyon/status/1846390995933630972">2024-10-16</a></h3>
+<p>(made 0 progress)</p>
+<figure>
+<video
+src="https://video.twimg.com/ext_tw_video/1846390869735493634/pu/vid/avc1/892x720/GK-QyT856aA4QI4d.mp4?tag=12"
+controls=""><a
+href="https://video.twimg.com/ext_tw_video/1846390869735493634/pu/vid/avc1/892x720/GK-QyT856aA4QI4d.mp4?tag=12">going
+back to genshin shader work</a></video>
+<figcaption aria-hidden="true">going back to genshin shader
+work</figcaption>
+</figure>
+<h3 id="section-4"><a
+href="https://x.com/0xKyon/status/1847593543063523346">2024-10-19</a></h3>
+<p>lessons learned:</p>
+<figure>
+<img src="https://pbs.twimg.com/media/GaP2QuSbUAMNHWq.jpg"
+alt="wrote a genshin impact style shader in a day on vacation in maldives" />
+<figcaption aria-hidden="true">wrote a genshin impact style shader in a
+day on vacation in maldives</figcaption>
+</figure>
+<figure>
+<video
+src="https://video.twimg.com/ext_tw_video/1847591050619334656/pu/vid/avc1/1272x720/NsxZE_r-LModhP7k.mp4?tag=12"
+controls=""><a
+href="https://video.twimg.com/ext_tw_video/1847591050619334656/pu/vid/avc1/1272x720/NsxZE_r-LModhP7k.mp4?tag=12">wrote
+a genshin impact style shader in a day on vacation in
+maldives</a></video>
+<figcaption aria-hidden="true">wrote a genshin impact style shader in a
+day on vacation in maldives</figcaption>
+</figure>
+<p>features:</p>
+<ul class="incremental">
+<li>realtime in-browser</li>
+<li>supports any vrm</li>
+<li>self shadow (add blending)</li>
+<li>hair (make anistropic)</li>
+<li>outline (depth + normals merged)</li>
+<li>adjust tonemapping (custom built gran turismo tone mapping)</li>
+<li>no ramp or lighting textures (creates virtual textures on load)</li>
+<li>rim lighting</li>
+<li>face shadow (need to figure out later)</li>
+</ul>
+
+  <div class="debug-grid"></div>
+  <script src="static/js/index.js"></script>
+</body>
+</html>
