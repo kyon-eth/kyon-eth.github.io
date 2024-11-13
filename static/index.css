@@ -182,11 +182,13 @@ p {
   word-break: break-word;
   word-wrap: break-word;
   hyphens: auto;
+  color: var(--text-color-alt);
 }
 
 img, video {
   display: block;
   width: 100%;
+  max-height: 50vh;
   object-fit: contain;
   overflow: hidden;
 }
@@ -247,6 +249,7 @@ figure {
 }
 
 figcaption {
+  text-align: center;
   display: block;
   font-style: italic;
   margin-top: var(--line-height);
