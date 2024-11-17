@@ -161,6 +161,12 @@ function gridCellDimensions() {
         setFallbackHeight(media);
       }
     }
+
+    // Remove trailing slash from URL if present
+    if (window.location.pathname.length > 1 && window.location.pathname.endsWith('/')) {
+        const newPath = window.location.pathname.slice(0, -1);
+        window.history.replaceState(null, '', newPath + window.location.search + window.location.hash);
+    }
   }
   
   // Initialize and handle events
@@ -198,3 +204,4 @@ function gridCellDimensions() {
       }
     }
   }
+
