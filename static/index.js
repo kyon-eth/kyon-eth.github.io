@@ -181,7 +181,7 @@ function gridCellDimensions() {
         gtag('config', 'G-HGLY59697K', {
             'send_page_view': false  // Defer page view until after critical content loads
         });
-    }, 2000); // 2 second delay
+    }, 300); // 2 second delay
   }
   
   // Initialize and handle events
