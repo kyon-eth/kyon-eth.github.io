@@ -47,7 +47,7 @@ function gridCellDimensions() {
     function setupLazyLoading(media) {
       // Check if the media already has data attributes set
       if (media.dataset.src || media.dataset.srcset) {
-        console.debug('Media already setup for lazy loading:', media);
+        // console.debug('Media already setup for lazy loading:', media);
         return {
           originalSrc: media.dataset.src,
           originalSrcset: media.dataset.srcset
@@ -89,7 +89,7 @@ function gridCellDimensions() {
   
       const loadPromise = new Promise((resolve, reject) => {
         const onSuccess = () => {
-          console.debug('Successfully loaded media:', media.dataset.src);
+        //   console.debug('Successfully loaded media:', media.dataset.src);
           resolve(media);
         };
   
@@ -167,6 +167,21 @@ function gridCellDimensions() {
         const newPath = window.location.pathname.slice(0, -1);
         window.history.replaceState(null, '', newPath + window.location.search + window.location.hash);
     }
+
+    // Defer GA loading until after page load
+    setTimeout(function() {
+        var script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-HGLY59697K';
+        script.async = true;
+        document.head.appendChild(script);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-HGLY59697K', {
+            'send_page_view': false  // Defer page view until after critical content loads
+        });
+    }, 2000); // 2 second delay
   }
   
   // Initialize and handle events
