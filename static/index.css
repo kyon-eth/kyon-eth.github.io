@@ -287,6 +287,12 @@ body {
   :root {
     font-size: 14px;
   }
+  .pfp {
+    border: 4px solid black !important;
+    margin-top: -40px !important;
+    width: 64px !important;
+    height: 64px !important;
+  }
   /* body {
     padding: var(--line-height) 1ch;
   } */
@@ -656,28 +662,3 @@ label input {
 .grid:has(> :last-child:nth-child(7)) { --grid-cells: 7; }
 .grid:has(> :last-child:nth-child(8)) { --grid-cells: 8; }
 .grid:has(> :last-child:nth-child(9)) { --grid-cells: 9; }
-
-/* DEBUG UTILITIES */
-
-.debug .debug-grid {
-  --color: color-mix(in srgb, var(--text-color) 10%, var(--background-color) 90%);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  background-image:
-    repeating-linear-gradient(var(--color) 0 1px, transparent 1px 100%),
-    repeating-linear-gradient(90deg, var(--color) 0 1px, transparent 1px 100%);
-  background-size: 1ch var(--line-height);
-  margin: 0;
-}
-
-.debug .off-grid {
-  background: rgba(255, 0, 0, 0.1);
-}
-
-.debug-toggle-label {
-  text-align: right;
-}
