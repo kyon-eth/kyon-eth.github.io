@@ -16,7 +16,6 @@ function processAnalyticsQueue() {
   requestIdleCallback(() => {
     batch.forEach(event => gtag(...event));
     isProcessing = false;
-    
     if (analyticsQueue.length > 0) {
       processAnalyticsQueue();
     }
@@ -31,6 +30,8 @@ function queueAnalyticsEvent(...args) {
 }
 
 function loadAnalytics() {
+  if (analyticsLoaded) return;
+  
   gtag('js', new Date());
   gtag('config', ANALYTICS_ID, {
     'send_page_view': false,
@@ -51,44 +52,60 @@ function loadAnalytics() {
   }, { timeout: 5000 });
 }
 
-// Grid and media handling utilities
-function gridCellDimensions() {
-  const element = document.createElement("div");
-  element.style.position = "fixed";
-  element.style.height = "var(--line-height)";
-  element.style.width = "1ch";
-  document.body.appendChild(element);
-  const rect = element.getBoundingClientRect();
-  document.body.removeChild(element);
-  return { width: rect.width, height: rect.height };
+// Grid calculation utilities
+function getComputedLineHeight() {
+  const body = document.body;
+  const computedStyle = window.getComputedStyle(body);
+  return parseFloat(computedStyle.getPropertyValue('--line-height')) || 1.5;
 }
 
-function handleMediaDimensions(media, cell) {
-  function setHeightFromRatio(media, ratio) {
-    const rect = media.getBoundingClientRect();
-    const realHeight = rect.width / ratio;
-    const diff = cell.height - (realHeight % cell.height);
-  }
-
-  function setFallbackHeight(media) {
-    const rect = media.getBoundingClientRect();
-    const height = Math.round((rect.width / 2) / cell.height) * cell.height;
-    media.style.setProperty("height", `${height}px`);
-  }
-
-  var width, height;
-  switch (media.tagName) {
-    case "IMG":
-      width = media.naturalWidth;
-      height = media.naturalHeight;
-      break;
-    case "VIDEO":
-      width = media.videoWidth;
-      height = media.videoHeight;
-      break;
-  }
+function gridCellDimensions() {
+  const testElement = document.createElement("div");
+  testElement.style.cssText = `
+    position: absolute;
+    height: var(--line-height);
+    width: 1ch;
+    visibility: hidden;
+    pointer-events: none;
+  `;
+  document.body.appendChild(testElement);
   
-  if (width > 0 && height > 0) {
+  const rect = testElement.getBoundingClientRect();
+  const dimensions = {
+    width: Math.round(rect.width * 100) / 100,
+    height: Math.round(rect.height * 100) / 100,
+    lineHeight: getComputedLineHeight()
+  };
+  
+  document.body.removeChild(testElement);
+  return dimensions;
+}
+
+function handleMediaDimensions(media, gridDims) {
+  function setHeightFromRatio(element, ratio) {
+    const rect = element.getBoundingClientRect();
+    const targetHeight = rect.width / ratio;
+    const gridLines = Math.round(targetHeight / gridDims.height);
+    const adjustedHeight = gridLines * gridDims.height;
+    element.style.height = `${adjustedHeight}px`;
+  }
+
+  function setFallbackHeight(element) {
+    const rect = element.getBoundingClientRect();
+    const gridLines = Math.round((rect.width / 2) / gridDims.height);
+    element.style.height = `${gridLines * gridDims.height}px`;
+  }
+
+  let width, height;
+  if (media.tagName === "IMG") {
+    width = media.naturalWidth;
+    height = media.naturalHeight;
+  } else if (media.tagName === "VIDEO") {
+    width = media.videoWidth;
+    height = media.videoHeight;
+  }
+
+  if (width && height) {
     setHeightFromRatio(media, width / height);
   } else {
     setFallbackHeight(media);
@@ -109,10 +126,7 @@ function setupLazyLoading(media) {
     media.getAttribute('src');
   const originalSrcset = media.getAttribute('srcset');
 
-  if (!originalSrc) {
-    console.warn('No source found for media:', media);
-    return null;
-  }
+  if (!originalSrc) return null;
 
   media.dataset.src = originalSrc;
   if (originalSrcset) media.dataset.srcset = originalSrcset;
@@ -125,12 +139,12 @@ function setupLazyLoading(media) {
   return { originalSrc, originalSrcset };
 }
 
-function loadMedia(media, originalSources, cell) {
+function loadMedia(media, originalSources, gridDims) {
   if (!originalSources) return Promise.reject('No sources provided');
 
   return new Promise((resolve, reject) => {
     const onSuccess = () => {
-      handleMediaDimensions(media, cell);
+      handleMediaDimensions(media, gridDims);
       resolve(media);
     };
 
@@ -142,7 +156,6 @@ function loadMedia(media, originalSources, cell) {
     if (media.tagName === 'IMG') {
       media.addEventListener('load', onSuccess, { once: true });
       media.addEventListener('error', onError, { once: true });
-
       if (originalSources.originalSrcset) {
         media.setAttribute('srcset', originalSources.originalSrcset);
       }
@@ -150,18 +163,60 @@ function loadMedia(media, originalSources, cell) {
     } else if (media.tagName === 'VIDEO') {
       media.addEventListener('loadeddata', onSuccess, { once: true });
       media.addEventListener('error', onError, { once: true });
-      
       media.setAttribute('src', originalSources.originalSrc);
       media.load();
     }
   });
 }
 
-// Main initialization function
-function initializePage() {
-  const cell = gridCellDimensions();
+// Grid alignment checking
+function checkOffsets() {
+  const ignoredTagNames = new Set([
+    "THEAD", "TBODY", "TFOOT", "TR", "TD", "TH",
+    "SCRIPT", "STYLE", "META", "LINK", "BR", "HR"
+  ]);
   
-  // Setup intersection observer for media
+  const gridDims = gridCellDimensions();
+  const halfGridHeight = gridDims.height / 2;
+  
+  requestAnimationFrame(() => {
+    const elements = document.querySelectorAll("body *:not(.debug-grid, .debug-toggle)");
+    
+    elements.forEach(element => {
+      if (ignoredTagNames.has(element.tagName)) return;
+      
+      const rect = element.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+      
+      const top = Math.round((rect.top + window.scrollY) * 100) / 100;
+      const remainder = top % halfGridHeight;
+      
+      // Use a small threshold for floating point precision
+      const threshold = 0.1;
+      if (remainder > threshold && remainder < (halfGridHeight - threshold)) {
+        element.classList.add("off-grid");
+        if (!element.hasAttribute('data-off-grid-logged')) {
+          console.debug(
+            "Grid offset:",
+            element.tagName.toLowerCase() + 
+            (element.className ? '.' + element.className.split(' ').join('.') : ''),
+            `\nExpected multiple of ${halfGridHeight.toFixed(2)}, got remainder ${remainder.toFixed(2)}`,
+            `\nActual top: ${top.toFixed(2)}`
+          );
+          element.setAttribute('data-off-grid-logged', 'true');
+        }
+      } else {
+        element.classList.remove("off-grid");
+      }
+    });
+  });
+}
+
+// Main initialization
+function initializePage() {
+  const gridDims = gridCellDimensions();
+  
+  // Setup intersection observer
   const observerOptions = {
     root: null,
     rootMargin: '50px 0px',
@@ -177,10 +232,10 @@ function initializePage() {
           originalSrcset: media.dataset.srcset
         };
 
-        loadMedia(media, originalSources, cell)
+        loadMedia(media, originalSources, gridDims)
           .catch(() => {
             media.setAttribute('src', originalSources.originalSrc);
-            handleMediaDimensions(media, cell);
+            handleMediaDimensions(media, gridDims);
           })
           .finally(() => {
             observer.unobserve(media);
@@ -189,60 +244,30 @@ function initializePage() {
     });
   }, observerOptions);
 
-  // Process all media elements
-  const medias = document.querySelectorAll("img, video");
-  medias.forEach(media => {
+  // Process media elements
+  document.querySelectorAll("img, video").forEach(media => {
     const originalSources = setupLazyLoading(media);
     if (originalSources) {
       mediaObserver.observe(media);
     } else {
       media.setAttribute('src', media.dataset.src || '');
-      handleMediaDimensions(media, cell);
+      handleMediaDimensions(media, gridDims);
     }
   });
 
-  // Clean up URL
+  // Clean URLs
   if (window.location.pathname.length > 1 && window.location.pathname.endsWith('/')) {
     const newPath = window.location.pathname.slice(0, -1);
     window.history.replaceState(null, '', newPath + window.location.search + window.location.hash);
   }
 
-  // Initialize analytics after content is loaded
+  // Load analytics
   requestIdleCallback(() => {
     loadAnalytics();
   }, { timeout: 3000 });
 }
 
-// Grid offset checking utility
-function checkOffsets() {
-  const ignoredTagNames = new Set([
-    "THEAD", "TBODY", "TFOOT", "TR", "TD", "TH"
-  ]);
-  
-  const cell = gridCellDimensions();
-  const elements = document.querySelectorAll("body :not(.debug-grid, .debug-toggle)");
-  
-  requestAnimationFrame(() => {
-    elements.forEach(element => {
-      if (ignoredTagNames.has(element.tagName)) return;
-      
-      const rect = element.getBoundingClientRect();
-      if (rect.width === 0 && rect.height === 0) return;
-      
-      const top = rect.top + window.scrollY;
-      const offset = top % (cell.height / 2);
-      
-      if (offset > 0) {
-        element.classList.add("off-grid");
-        console.error("Incorrect vertical offset for", element, "with remainder", top % cell.height, "when expecting divisible by", cell.height / 2);
-      } else {
-        element.classList.remove("off-grid");
-      }
-    });
-  });
-}
-
-// Event listeners with debouncing
+// Event handlers
 let resizeTimeout;
 window.addEventListener('resize', () => {
   if (resizeTimeout) {
@@ -254,11 +279,17 @@ window.addEventListener('resize', () => {
   });
 }, { passive: true });
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    requestIdleCallback(() => {
+      initializePage();
+      checkOffsets();
+    }, { timeout: 1000 });
+  }, { passive: true });
+} else {
   requestIdleCallback(() => {
     initializePage();
     checkOffsets();
   }, { timeout: 1000 });
-}, { passive: true });
-
+}
