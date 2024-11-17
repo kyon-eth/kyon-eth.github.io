@@ -1,24 +1,89 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <!-- Favicons -->
-  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
-  <meta name="dcterms.date" content="2024-11-08" />
-  <!-- Open Graph tags -->
-  <meta property="og:image" content="/static/og_image.jpg" />
-  <meta property="og:image:alt" content="why i’m building a browser" />
-  <meta property="og:title" content="why i’m building a browser" />
-  <meta property="og:type" content="website" />
-  
-  <title>why i’m building a browser</title>
-  <link rel="stylesheet" href="/static/reset.css" />
-  <link rel="stylesheet" href="/static/index.css" />
-</head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    
+    <!-- Performance optimizations -->
+    <link rel="preload" as="font" href="https://fonts.cdnfonts.com/css/jetbrains-mono-2" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.cdnfonts.com" />
+    
+    <!-- Security headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.cdnfonts.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.cdnfonts.com; script-src 'self';">
+    
+    <!-- Favicons with sizes -->
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+    
+    <meta name="author" content="0xkyon" />
+    <meta name="dcterms.date" content="2024-11-08" />
+            
+    <!-- Open Graph tags -->
+    <meta property="og:image" content="/static/og_image.jpg" />
+    <meta property="og:image:alt" content="why i’m building a browser" />
+    <meta property="og:title" content="why i’m building a browser" />
+        <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kyon.dev" />
+    <meta property="og:site_name" content="kyon.dev" />
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/static/og/blog//blog//" />
+    <meta name="twitter:title" content="why i’m building a browser" />
+        <meta name="twitter:site" content="https://kyon.dev" />
+    <meta name="twitter:creator" content="@0xkyon" />
+    
+    <!-- SEO -->
+    <meta http-equiv="content-language" content="en-us">
+    <meta name="robots" content="index, follow">
+    <title>why i’m building a browser - kyon's blog</title>
+    <link rel="canonical" href="https://kyon.dev/blog/why-im-building-a-browser.html" />
+    
+    <!-- Mobile Web App -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="kyon.dev">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <!-- Stylesheets with performance attributes -->
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/jetbrains-mono-2" media="print" onload="this.media='all'">
+        <link rel="stylesheet" href="/static/reset.css" />
+        <link rel="stylesheet" href="/static/index.css" />
+                
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "why i’m building a browser",
+        "author": {
+        "@type": "Person",
+        "name": "0xkyon",
+        "url": "https://kyon.dev"
+        },
+        "datePublished": "2024-11-08",
+        "dateModified": "2024-11-08",
+        "publisher": {
+        "@type": "Person",
+        "name": "0xkyon",
+        "url": "https://kyon.dev"
+        },
+            "url": "https://kyon.dev"
+    }
+    </script>
+    </head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HGLY59697K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HGLY59697K');
+</script>
+
 <body>
 <table class="header" style="border: none;">
     <tr>

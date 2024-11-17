@@ -1,29 +1,84 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <!-- Favicons -->
+  
+  <!-- Performance optimizations -->
+  <link rel="preload" as="font" href="https://fonts.cdnfonts.com/css/jetbrains-mono-2" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.cdnfonts.com" />
+  
+  <!-- Security headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.cdnfonts.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.cdnfonts.com; script-src 'self';">
+  
+  <!-- Favicons with sizes -->
   <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+
+  <!-- Meta tags -->
   <meta name="author" content="0xkyon" />
   <meta name="dcterms.date" content="2024-08-26" />
+  <meta name="keywords" content="0xkyon, Kyonosuke, machine learning, AI projects, isekai fan, devlog, tech blog, waifu AI, Video to Motion tools, OAI Waifu, custom browser development, Eliza chatbot, LLIM models, podcast summarization, Genshin Impact shaders, X Stream Chat, open source projects, x dot com creator, experimental coding, developer tools, creative programming, indie dev projects" />
+  <meta name="description" content="hi, i'm kyon. i binge isekai and code random internet experiments." />
+
   <!-- Open Graph tags -->
   <meta property="og:image" content="/static/og_image.jpg" />
   <meta property="og:image:alt" content="Kyonosuke" />
   <meta property="og:title" content="Kyonosuke" />
+  <meta property="og:description" content="practical ml &amp; impractical swe" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kyon.dev" />
+  <meta property="og:site_name" content="kyon.dev" />
+
   <!-- Twitter Card tags -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="/static/og_image.jpg" />
-  <meta name="twitter:title" content="Kyonosuke" />
-  
+  <meta name="twitter:title" content="kyon - practical ml & impractical swe" />
+  <meta name="twitter:description" content="i binge isekai and code random internet experiments." />
+  <meta name="twitter:site" content="https://kyon.dev" />
+  <meta name="twitter:creator" content="@0xkyon" />
+
+  <!-- SEO -->
+  <meta http-equiv="content-language" content="en-us">
+  <meta name="robots" content="index, follow">
   <title>kyon - practical ml & impractical swe</title>
-  <link rel="stylesheet" href="static/reset.css" />
-  <link rel="stylesheet" href="static/index.css" />
+  <link rel="canonical" href="https://kyon.dev" />
+
+  <!-- Mobile Web App -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="kyon.dev">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Stylesheets with performance attributes -->
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/jetbrains-mono-2" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/static/index.css" />
+  <link rel="stylesheet" href="/static/index.css" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "0xkyon",
+      "url": "https://kyon.dev",
+      "sameAs": [
+        "https://twitter.com/ttype"
+      ],
+      "description": "I binge isekai and build random internet experiments."
+    }
+    </script>
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HGLY59697K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HGLY59697K');
+</script>
+
 <body>
 <table class="header" style="border: none;">
     <tr>
@@ -43,7 +98,6 @@
       </td>
     </tr>
 </table>
-<!-- <label class="debug-toggle-label"><input type="checkbox" class="debug-toggle" /> Debug mode</label> -->
 
 <!-- ## goto
 
@@ -89,7 +143,6 @@ Improved</a></li>
 unless you’re selling me feet pics.</p>
 <p>there is no other way to reach me.</p>
 
-  <div class="debug-grid"></div>
   <script src="/static/index.js"></script>
 </body>
 </html>
